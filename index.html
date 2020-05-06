@@ -9,11 +9,10 @@
 <body>
 <h1>COVID-19 CHARTS REAL TIME</h1>
 <h3>Tính đến thời điểm: <span id="timeNow"></span></h3>
-<span><strong>@2020 GiangTH</strong></span>
+<h5><strong>@2020 GiangTH</strong></h5>
 
-<div id="global"></div>
-<div id="vietnam"></div>
-<p><strong>Nếu biểu đồ không có dữ liệu số người tử vong tức là số người tử vong = 0</strong></p>
+<div id="columnchart_material_world" style="width: 600px; height: 300px; margin-bottom: 50px;"></div>
+<div id="columnchart_material_vn" style="width: 600px; height: 300px;"></div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
@@ -43,32 +42,47 @@ var getJSON = function(url, callback) {
             if (err != null) {
               console.error(err);
             } else {
-              // Load google charts
-              google.charts.load('current', { 'packages': ['corechart'] });
+              google.charts.load('current', { 'packages': ['bar'] });
               google.charts.setOnLoadCallback(drawChart);
 
               function drawChart() {
-                //get data global
-                var data = google.visualization.arrayToDataTable([
-                  ['Task', 'Hours per Day'],
-                  ['Tổng số ca mắc trên thế giới', parseInt(`${data2.Global.TotalConfirmed}`)],
-                  ['Tổng số ca tử vong trên thế giới', parseInt(`${data2.Global.TotalDeaths}`)],
-                  ['Tổng số ca đã khỏi bệnh trên thế giới', parseInt(`${data2.Global.TotalRecovered}`)]
+                //world
+                var dataWorld = google.visualization.arrayToDataTable([
+                  ['', 'Số người nhiễm', 'Số người tử vong', 'Số người khỏi bệnh', 'Số người nhiễm mới', 'Số người tử vong mới', 'Số người khỏi bệnh mới'],
+                  ['Thế giới', parseInt(`${data2.Global.TotalConfirmed}`), parseInt(`${data2.Global.TotalDeaths}`), parseInt(`${data2.Global.TotalRecovered}`), 
+                  parseInt(`${data2.Global.NewConfirmed}`), parseInt(`${data2.Global.NewDeaths}`), parseInt(`${data2.Global.NewRecovered}`)]
                 ]);
-                var options = { 'title': 'Biểu đồ COVID-19 ở trên thế giới', 'width': 550, 'height': 400 };
-                var chart = new google.visualization.PieChart(document.getElementById('global'));
-                chart.draw(data, options);
 
-                //get data viet nam
+                var options = {
+                  chart: {
+                    title: 'Tình hình COVID-19 trên thế giới',
+                  },
+                  bars: 'vertical',
+                  vAxis: { format: 'decimal' }
+                };
+
+                var chart = new google.charts.Bar(document.getElementById('columnchart_material_world'));
+                chart.draw(dataWorld, google.charts.Bar.convertOptions(options));
+
+                //viet nam
                 var dataVietNam = google.visualization.arrayToDataTable([
-                  ['Task', 'Hours per Day'],
-                  ['Tổng số ca nhiễm ở Việt Nam', parseInt(`${data2.Countries[241].TotalConfirmed}`)],
-                  ['Tổng số ca tử vong ở Việt Nam', parseInt(`${data2.Countries[241].TotalDeaths}`)],
-                  ['Tổng số ca đã khỏi bệnh ở Việt Nam', parseInt(`${data2.Countries[241].TotalRecovered}`)]
+                  ['', 'Số người nhiễm', 'Số người tử vong', 'Số người khỏi bệnh', 'Số người nhiễm mới', 'Số người tử vong mới', 'Số người khỏi bệnh mới'],
+                  ['Việt Nam', parseInt(`${data2.Countries[241].TotalConfirmed}`), parseInt(`${data2.Countries[241].TotalDeaths}`), 
+                  parseInt(`${data2.Countries[241].TotalRecovered}`), parseInt(`${data2.Countries[241].NewConfirmed}`),
+                  parseInt(`${data2.Countries[241].NewDeaths}`), parseInt(`${data2.Countries[241].NewRecovered}`)]
                 ]);
-                var options2 = { 'title': 'Biểu đồ COVID-19 ở Việt Nam', 'width': 550, 'height': 400 };
-                var chart2 = new google.visualization.PieChart(document.getElementById('vietnam'));
-                chart2.draw(dataVietNam, options2);
+
+                var options2 = {
+                  chart: {
+                    title: 'Tình hình COVID-19 ở Việt Nam',
+                  },
+                  bars: 'vertical',
+                  vAxis: { format: 'decimal' }
+                };
+
+                var chart = new google.charts.Bar(document.getElementById('columnchart_material_vn'));
+                chart.draw(dataVietNam, google.charts.Bar.convertOptions(options2));
+
               }
             }
         });
