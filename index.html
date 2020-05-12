@@ -11,8 +11,8 @@
 <h3>Tính đến thời điểm: <span id="timeNow"></span></h3>
 <h5><strong>@2020 GiangTH</strong></h5>
 
-<div id="columnchart_material_world" style="width: 600px; height: 300px; margin-bottom: 50px;"></div>
-<div id="columnchart_material_vn" style="width: 600px; height: 300px;"></div>
+<div id="columnchart_material_world" style="width: 700px; height: 300px; margin-bottom: 50px;"></div>
+<div id="columnchart_material_vn" style="width: 700px; height: 300px;"></div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
@@ -67,9 +67,9 @@ var getJSON = function(url, callback) {
                 //viet nam
                 var dataVietNam = google.visualization.arrayToDataTable([
                   ['', 'Số người nhiễm', 'Số người tử vong', 'Số người khỏi bệnh', 'Số người nhiễm mới', 'Số người tử vong mới', 'Số người khỏi bệnh mới'],
-                  ['Việt Nam', parseInt(`${data2.Countries[241].TotalConfirmed}`), parseInt(`${data2.Countries[241].TotalDeaths}`), 
-                  parseInt(`${data2.Countries[241].TotalRecovered}`), parseInt(`${data2.Countries[241].NewConfirmed}`),
-                  parseInt(`${data2.Countries[241].NewDeaths}`), parseInt(`${data2.Countries[241].NewRecovered}`)]
+                  ['Việt Nam', parseInt(`${data2.Countries[180].TotalConfirmed}`), parseInt(`${data2.Countries[180].TotalDeaths}`), 
+                  parseInt(`${data2.Countries[180].TotalRecovered}`), parseInt(`${data2.Countries[180].NewConfirmed}`),
+                  parseInt(`${data2.Countries[180].NewDeaths}`), parseInt(`${data2.Countries[180].NewRecovered}`)]
                 ]);
 
                 var options2 = {
