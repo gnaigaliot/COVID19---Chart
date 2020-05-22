@@ -64,12 +64,20 @@ var getJSON = function(url, callback) {
                 var chart = new google.charts.Bar(document.getElementById('columnchart_material_world'));
                 chart.draw(dataWorld, google.charts.Bar.convertOptions(options));
 
+                //lay so thu tu cua viet nam
+                let index;
+                for(var i=0; i<data2.Countries.length; i++) {
+                    if(data2.Countries[i].CountryCode === 'VN') {
+                        index = i;
+                    }
+                }
+
                 //viet nam
                 var dataVietNam = google.visualization.arrayToDataTable([
                   ['', 'Số người nhiễm', 'Số người tử vong', 'Số người khỏi bệnh', 'Số người nhiễm mới', 'Số người tử vong mới', 'Số người khỏi bệnh mới'],
-                  ['Việt Nam', parseInt(`${data2.Countries[180].TotalConfirmed}`), parseInt(`${data2.Countries[180].TotalDeaths}`), 
-                  parseInt(`${data2.Countries[180].TotalRecovered}`), parseInt(`${data2.Countries[180].NewConfirmed}`),
-                  parseInt(`${data2.Countries[180].NewDeaths}`), parseInt(`${data2.Countries[180].NewRecovered}`)]
+                  ['Việt Nam', parseInt(`${data2.Countries[index].TotalConfirmed}`), parseInt(`${data2.Countries[index].TotalDeaths}`), 
+                  parseInt(`${data2.Countries[index].TotalRecovered}`), parseInt(`${data2.Countries[index].NewConfirmed}`),
+                  parseInt(`${data2.Countries[index].NewDeaths}`), parseInt(`${data2.Countries[index].NewRecovered}`)]
                 ]);
 
                 var options2 = {
